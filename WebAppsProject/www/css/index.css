@@ -1,0 +1,492 @@
+@font-face
+{
+    src: url(../fonts/SegoeUI.ttf);
+    font-family: SegoeUI;
+}
+
+body
+{
+    margin: 0px;
+    font-family: SegoeUI;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+#containter
+{
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    overflow-x: scroll;
+    background: linear-gradient(40deg, #A9C9FF 25%, #FFBBEC 75%);
+}
+
+
+.AppName
+{
+    float: right;
+    padding-top: 0.5em;
+    padding-right: 2em;
+    font-size: 1.5em;
+    color: white;
+    text-decoration: none;
+}
+
+.logo
+{
+  width: 3.7em; 
+  display: block; 
+  float: left; 
+  padding-top: 1%; 
+  padding-bottom: 1%; 
+  margin-left: 5%;"
+}
+
+.header 
+{
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+}
+
+.WelcomeUser
+{
+    height: 1.5em;
+    margin-top: 4em;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.div1
+{
+    flex-direction:column;
+    text-align: center;
+    width: 100%;
+    height: auto;
+}
+
+.divs
+{
+    margin-left: 17%;
+}
+
+.col1, .col2, .col3
+{
+    width: 20em;
+    height: 12em;
+    float: left;
+}
+
+.col2, .col3
+{
+    margin-left: 5%;
+}
+
+
+.AddItem, .RemoveAllItems, .ViewItem, .Calculate, .SearchItems, .Settings
+{
+    width: 75%;
+    height: 100%;
+    border-radius: 25px;
+    margin-top: 20%;
+    background-color: white;
+    box-shadow: 4px 3px 8px 1px #969696;
+}
+
+p.block-title
+{
+    color: #4d4444;
+    font-weight: bold;
+    padding-top: 10%;
+}
+
+.CardImg
+{
+    padding-top: 30%;
+}
+
+.NewItemContainer
+{
+    background-color: white;
+    border-radius: 2em;
+    width: 15em;
+    height: auto;
+    color: #4d4444;
+    font-weight: bold;
+    padding: 1em;
+    margin-left:auto;
+    margin-right: auto;
+    margin-top: 5em;
+    box-shadow: 4px 3px 8px 1px #969696;
+}
+
+#quantity
+{
+    display: inline-block;
+}
+
+.quantityBtn
+{
+    border: none;
+    text-align: center;
+    background-color: #ffbbec; 
+    color: #4d4444;
+}
+
+button:focus
+{
+    outline: none;
+}
+
+input
+{
+    color: #4d4444;
+    border: none;
+    border-bottom: 2px solid #ffbbec;
+    background-color: transparent;
+}
+
+input:focus
+{
+    outline: none;
+}
+
+input.checkbox1
+{
+    color: #ffbbec;
+}
+
+.AddItemBtn
+{
+    font-size: 20px;
+    width: 45%;
+    height: auto;
+    border: none;
+    border-radius: 25px;
+    background-color: #ffbbec; 
+}
+
+#itemsListContainer
+{
+  display: flex;
+  align-items: center;
+  flex-direction:column;
+  justify-content: center;
+  width: 50%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
+}
+
+.item
+{
+  background-color: white;
+  border-radius: 25px;
+  width: 50%;
+  padding: 2%;
+  color: #4d4444;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  box-shadow: 4px 3px 8px 1px #969696;
+}
+
+.deleteItem
+{
+  float: left;
+  padding-top: 5%;
+}
+
+.itemInfo
+{
+  float: left;
+  text-align: left;
+  padding-right: 5%;
+  padding-left: 5%;
+}
+
+.itemName
+{
+  font-weight: bold;
+}
+
+.line
+{
+  float: left;
+  padding-top: 20%;
+  padding-left: 10%;
+  border-left: 1px solid black;
+}
+
+.itemsTotalCost
+{
+  float: left;
+  padding-top: 5.5%;
+  padding-left: 5.5%;
+  margin-left: -10%;
+}
+
+
+
+@media only screen and (max-width: 1141px)
+{
+    .AppName
+    {
+        float: right;
+        padding-top: 2%;
+        padding-right: 3%;
+        font-size: 20px;
+        color: white;
+        text-decoration: none;
+    }
+
+    .WelcomeUser
+    {
+      color: white;
+      margin-top: 21%;
+      font-size: 30px;
+    }
+
+    #container
+    {
+        flex-direction:column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .divs
+    {
+      margin-left: 7%;
+    }
+
+    .menu
+    {
+        width: 10em;
+        font-size: 1.7em;
+    }
+
+    .active
+    {
+        background-color: #a9c9ff;
+    }
+
+    .col1, .col2, .col3
+    {
+        margin-left: -3%;
+        width: 100%;
+        height: 15em;
+        overflow: hidden;
+        margin-bottom: -7%;
+    }
+
+    .col1
+    {
+        margin-top: 5%;
+    }
+
+    .AddItem, .RemoveAllItems, .ViewItem, .Calculate, .SearchItems, .Settings
+    {
+        width: 45%;
+        height: 70%;
+        float:left;
+        margin-top: 5%;
+    }
+
+    .RemoveAllItems, .Calculate, .Settings
+    {
+        margin-left: 7%;
+    }
+
+    .CardImg
+    {
+      padding-top: 30%;
+    }
+
+    p.block-title
+    {
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+        padding-top: 5%;
+    }
+
+    .itemsListContainer
+    {
+      width: 95%;
+      height: 100vh;
+    }
+
+    img.deleteItem
+    {
+      width: 75%;
+      height: 75%;
+      padding-left: 15%;
+    }
+
+    .item
+    {
+      background-color: white;
+      border-radius: 20px;
+      width:160%;
+      height: auto;
+      padding: 5%;
+      color: #4d4444;
+      margin-bottom: 5%;
+    }
+
+    .itemInfo
+    {
+      float: left;
+      text-align: left;
+      width: 55%;
+      height: 100%;
+      border: none;
+      border-right: 1px solid black;
+    }
+
+    .itemsTotalCost
+    {
+      float: left;
+      width: 38%;
+      font-size: 17px;
+      padding: 0px;
+      margin-left: 120%;
+      margin-top: -35%;
+    }
+
+    .itemName
+    {
+      padding-bottom: 2%;
+      font-size: 20px;
+    }
+
+    .itemPrice
+    {
+      font-size: 15px;
+    }
+
+    .QuantityDiv
+    {
+      padding-top: 0.2em;
+      font-size: 15px;
+      padding-bottom: 0.1em;
+    }
+
+    .QuantityDiv button
+    {
+      height: 1.6em;
+      width: 1.6em;
+      font-size: 15px; 
+    }
+
+    .NewItemContainer
+    {
+        width: 75%;
+        height: auto;
+        color: #4d4444;
+        font-weight: bold;
+        padding: 7%;
+        margin-left:auto;
+        margin-right: auto;
+        margin-top: 5em;
+    }
+
+    form, input, form label
+    {
+      font-size: 20px;
+    }
+
+    .RemoveItemBtn, .AddItemBtn
+    {
+      height: 1.7em;
+      width: 6em;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 3em;
+      background-color: #ffbbec; 
+    }
+
+    .quantityBtn
+    {
+      height: 1.6em;
+      width: 1.6em;
+      font-size: 1.1em; 
+    }
+
+    .checkbox1, .checkbox2
+    {
+      height: 1em;
+      width: 1em;
+      margin-top: 0.5em;
+    }
+
+    .backButton
+    {
+      float: left;
+      margin-left: 3%;
+      margin-top: 5%;
+    }
+
+    .settingsButton
+    {
+      float: right;
+      margin-right: 3%;
+      margin-top: 5%;
+    }
+
+    select.decorated option:hover 
+    {
+      background-color: yellow;
+      box-shadow: 0 0 10px 100px #1882A8 inset;
+    }
+
+    .splash
+    {
+      background-color: black;
+      color: white;
+      width: 100%;
+      height: 100vh;
+      z-index: 200;
+      top: 0;
+      left: 0;
+      line-height: 90vh;
+      position: fixed;
+      text-align: center;
+    }
+
+    .splash.display-none
+    {
+      background-color: black;
+      opacity: 0;
+      color: white;
+      width: 100%;
+      height: 100vh;
+      z-index: -10000;
+      top: 0;
+      left: 0;
+      line-height: 90vh;
+      position: fixed;
+      text-align: center;
+      transition: all 0.5s;
+    }
+
+
+    @keyframes fadeIn
+    {
+      to
+      {
+        opacity: 1;
+      }
+    }
+
+    .fade-in
+    {
+      opacity: 0;
+      animation: fadeIn 1s ease-in forwards;
+    }
+}

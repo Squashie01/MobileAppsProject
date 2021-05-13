@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="css/index.css">
+
+        <link rel="favicon icon" href="../www/img/favicon.png" type="image/x-icon">
+
+
+        <title>Home Screen</title>
+    </head>
+    <body>
+
+        <div class="splash">
+            <h1 class="fade-in"> Shopping List </h1>
+        </div>
+
+
+
+        <div id="containter">
+
+            <div class="header">
+                <header>
+                    <a href="index.html" class="AppName"> Shopping List </a>
+                </header>
+            </div>
+
+            <div class="div1">
+                <div class="WelcomeUser">
+                   Welcome, SpongeBob
+                </div>
+
+                <div class="divs">
+                    <div class="col1">
+                        <a href="addItems.html">
+                            <div class="AddItem">
+                                <img src="img/add.png" class="CardImg">
+                                <p class="block-title"> Add Items </p>
+                            </div>
+                        </a>
+
+                        <a href="removeAllItems.html">
+                            <div class="RemoveAllItems">
+                                <img src="img/delete.png" class="CardImg">
+                                <p class="block-title"> Remove All Items </p>
+                            </div>   
+                        </a>                                             
+                    </div>
+
+                    <div class="col2">
+                        <a href="viewItems.html">
+                            <div class="ViewItem">
+                                <img src="img/view.png" class="CardImg">
+                                <p class="block-title"> View Items </p>
+                            </div>
+                        </a>
+
+                        <a href="CostCalculator.html">
+                            <div class="Calculate">
+                                <img src="img/calculator.png" class="CardImg">
+                                <p class="block-title"> Cost Calculator </p>
+                            </div>  
+                        </a>                      
+                    </div>
+
+                    <div class="col3">
+                        <a href="SearchItems.html">
+                            <div class="SearchItems">
+                                <img src="img/search.png" class="CardImg">
+                                <p class="block-title"> Search Items </p>
+                            </div>
+                        </a>
+                      
+                        <a href="settings.html">
+                            <div class="Settings">
+                                <img src="img/SettingsB.png" class="CardImg">
+                                <p class="block-title"> Settings </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+           </div>
+
+        </div>
+        <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+        <script src="js/12-pouchdb-7.0.0.min.js"></script>
+        <script src="cordova.js"></script>
+        <script src="js/index.js"></script>
+    </body>
+</html>
