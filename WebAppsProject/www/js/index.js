@@ -36,12 +36,6 @@ document.addEventListener('DOMContentLoaded', (e) =>
 	}, 2000);
 });
 
-var userName = "";
-
-if (userName.toString().length <= 0) // This check to see if there is a username
-{																		   
-	NoUsername();
-}
 
 
 var Quan = 1;
@@ -453,16 +447,6 @@ function EmptyForm() // This is the alert when the user tries to add an item to 
 	event.preventDefault();
 }
 
-function NoUsername() // This is the alert when there is no username
-{
-	Swal.fire
-    ({
-	    title: 'Error!',
-	    text: 'You need to enter a username!',
-	    icon: 'warning',
-	    confirmButtonText: 'Will make one now'
-    });
-}
 
 function RemoveAll() // This is the alert when the user tries to remove all of the items from the list
 {

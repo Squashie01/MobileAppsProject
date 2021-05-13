@@ -37,6 +37,8 @@
 
         <link rel="favicon icon" href="../www/img/favicon.png" type="image/x-icon">
 
+        <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.css">
+
 
         <title> Setting </title>
     </head>
@@ -55,21 +57,20 @@
                 </div>
 
                 <div class="NewItemContainer">
-                    <form>
-                        <label> Total Cost of each Item </label>
-                        <br>
-                        <br>
-                        <div class="totalCostOfEachItem"> $29.99</div>
-                        <br>
-                        <br>
-                        <button class="RemoveItemBtn"> Calcualte </button>
+                    <form name="input">
+                        <input type="text" name="user_name" id="user_name" placeholder="Username" /> 
+                        <br/>
+                        <input type="button" value="Submit" onClick="addContact()"/>
                     </form>
                 </div>
                     
            </div>
 
         </div>
+        <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+        <script src="js/12-pouchdb-7.0.0.min.js"></script>
         <script src="cordova.js"></script>
         <script src="js/index.js"></script>
+        <script src="js/username.js"></script>
     </body>
 </html>

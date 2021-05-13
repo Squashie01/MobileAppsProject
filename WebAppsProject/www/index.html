@@ -40,7 +40,7 @@
 
         <title>Home Screen</title>
     </head>
-    <body>
+    <body onload="DisplayUsername()">
 
         <div class="splash">
             <h1 class="fade-in"> Shopping List </h1>
@@ -57,8 +57,8 @@
             </div>
 
             <div class="div1">
-                <div class="WelcomeUser">
-                   Welcome, SpongeBob
+                <div class="WelcomeUser" id="username">
+                   Welcome, username
                 </div>
 
                 <div class="divs">
@@ -117,5 +117,6 @@
         <script src="js/12-pouchdb-7.0.0.min.js"></script>
         <script src="cordova.js"></script>
         <script src="js/index.js"></script>
+        <script src="js/username.js"></script>
     </body>
 </html>
