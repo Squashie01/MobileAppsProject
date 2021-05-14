@@ -35,6 +35,14 @@ a
     text-decoration: none;
 }
 
+.appNameImg
+{
+  height: 25%;
+  width: 40%;
+  padding-left: 3%;
+  padding-top: 2%;
+}
+
 .logo
 {
   width: 3.7em; 
