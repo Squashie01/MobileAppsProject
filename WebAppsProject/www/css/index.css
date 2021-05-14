@@ -316,7 +316,7 @@ input.checkbox1
     p.block-title
     {
         color: black;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: bold;
         padding-top: 5%;
     }
@@ -449,50 +449,5 @@ input.checkbox1
     {
       background-color: yellow;
       box-shadow: 0 0 10px 100px #1882A8 inset;
-    }
-
-    .splash
-    {
-      background-color: black;
-      color: white;
-      width: 100%;
-      height: 100vh;
-      z-index: 200;
-      top: 0;
-      left: 0;
-      line-height: 90vh;
-      position: fixed;
-      text-align: center;
-    }
-
-    .splash.display-none
-    {
-      background-color: black;
-      opacity: 0;
-      color: white;
-      width: 100%;
-      height: 100vh;
-      z-index: -10000;
-      top: 0;
-      left: 0;
-      line-height: 90vh;
-      position: fixed;
-      text-align: center;
-      transition: all 0.5s;
-    }
-
-
-    @keyframes fadeIn
-    {
-      to
-      {
-        opacity: 1;
-      }
-    }
-
-    .fade-in
-    {
-      opacity: 0;
-      animation: fadeIn 1s ease-in forwards;
     }
 }

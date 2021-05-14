@@ -27,17 +27,6 @@ db = new PouchDB("DLS2ShoppingList"); // this creates the database
 
 
 
-const splash = document.querySelector('.splash');    // This makes the splash screen at the beginning
-document.addEventListener('DOMContentLoaded', (e) => 
-{
-	setTimeout(() => 
-	{
-		splash.classList.add('display-none');
-	}, 2000);
-});
-
-
-
 var Quan = 1;
   
 function add() // this controls the + button which increases the quantity by 1

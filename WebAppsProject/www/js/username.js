@@ -4,22 +4,7 @@ db = new PouchDB("usernames"); // this creates the database
 
 
 
-
-
-var username = '';
-
-function username()
-{
-	if (username.toString.length <= 0) 
-	{
-		NoUsername();
-		event.preventDefault();
-	}
-}
-
-
-
-function addContact() 
+function addUsername() 
 {
 	var user_name=document.getElementById("user_name").value;
 
@@ -41,7 +26,7 @@ function addContact()
 		    if (!err) 
 			{
 		    	console.log('Successfully saved a contact!');
-			  	alert ("Record added!!");
+			  	AddItemNotification();
 		    }
 		});
 	}
@@ -75,35 +60,6 @@ function DisplayUsername() // This is prints the username
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Alerts
 
 function NoUsername() // This is the alert when there is no username
@@ -120,4 +76,16 @@ function NoUsername() // This is the alert when there is no username
 function redirect()
 {
 	window.location.href = "settings.html";
+}
+
+function AddItemNotification() // This is the alert when a username was successfully created
+{
+    Swal.fire
+    ({
+	    title: 'Success!',
+	    text: 'Username was added!',
+	    icon: 'success',
+	    confirmButtonText: 'Yayyyy!'
+    });
+	event.preventDefault();
 }
