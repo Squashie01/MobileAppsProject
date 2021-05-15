@@ -26,8 +26,7 @@ var db;  // database variable
 db = new PouchDB("DLS2ShoppingList"); // this creates the database
 
 
-var PouchDB = require('pouchdb');
-PouchDB.plugin(require('pouchdb-find'));
+
 
 
 var Quan = 1;
@@ -299,18 +298,31 @@ function Category(number)
 			if(CategorySelection = SortByCategoryList.options[SortByCategoryList.selectedIndex].value = CategorySelection)
 			{
 			   	console.log(CategorySelection);
+				if(number == 1)
+				{
+					if (CategorySelection == "new catigory")
+					{
+						document.getElementById("CategoryOfItem").value= "";
+					}
+					else
+					{
+						document.getElementById("CategoryOfItem").value=  CategorySelection;
+					}
+				}
+				else
+				{
+					db.find({
+					selector: {name: CategorySelection},
+					fields: ['_id', 'name', 'price', 'category', 'item_quantity', 'totalCost'],
+					sort: ['name']
+					}).then(function (result) {
+					}).catch(function (err) {
+					// ouch, an error
+					});
 
-			   	db.find({
-			  	selector: {name: CategorySelection},
-			  	fields: ['_id', 'name', 'price', 'category', 'item_quantity', 'totalCost'],
-			  	sort: ['name']
-				}).then(function (result) {
-				}).catch(function (err) {
-			  	// ouch, an error
-				});
-
-				var print = db.find();
-				console.log(print);	
+					var print = db.find();
+					console.log(print);	
+				}
 
 			}
 		});
