@@ -38,10 +38,12 @@
         <link rel="favicon icon" href="../www/img/favicon.png" type="image/x-icon">
 
         <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.css">
-
+		<script>
+			var number = 1;
+		</script>
         <title> Add Items </title>
     </head>
-    <body>
+    <body onload="Category(number)">
         <div id="containter">
 
             <div class="header">
@@ -67,6 +69,12 @@
                         <input type="text" name="ItemPrice" placeholder="Cost per Item" id="CostOfItem" />
                         <br>
                         <br>
+						<form name="sortByForm">
+                        <select id="SortByCategory" name="SortByCategoryItems">
+                            <option value="" disabled selected> Sort By Category </option>
+							<option value="new catigory"> new catigory </option>
+                            <option id="itemByCategory"></option>
+                        </select>
                         <input type="text" name="ItemCategory" placeholder="Category e.g. Vegetables" id="CategoryOfItem" />
                         <br>
                         <br>
