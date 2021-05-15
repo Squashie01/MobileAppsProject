@@ -26,6 +26,9 @@ var db;  // database variable
 db = new PouchDB("DLS2ShoppingList"); // this creates the database
 
 
+var PouchDB = require('pouchdb');
+PouchDB.plugin(require('pouchdb-find'));
+
 
 var Quan = 1;
   
@@ -277,10 +280,35 @@ function Category()
 			categories += '<option id="itemByCategory"> ' + entry + '  </option>';
 		});
 
-		document.getElementById("SortByCategory").innerHTML = categories;
+		document.getElementById("SortByCategory").innerHTML = '<option value="" disabled selected> Sort By Category </option>' + categories;
+		
+		let SortByCategoryList = document.getElementById("SortByCategory"); // This and the next 5 lines of code
+		var CategorySelection = "";									// I tried to check to see if a certain category was selected
+
+		SortByCategoryList.addEventListener('change', () => 
+		{
+			CategorySelection = SortByCategoryList.options[SortByCategoryList.selectedIndex].value;
+
+			if(CategorySelection = SortByCategoryList.options[SortByCategoryList.selectedIndex].value = CategorySelection)
+			{
+			   	console.log(CategorySelection);
+
+			   	db.find({
+			  	selector: {name: CategorySelection},
+			  	fields: ['_id', 'name', 'price', 'category', 'item_quantity', 'totalCost'],
+			  	sort: ['name']
+				}).then(function (result) {
+				}).catch(function (err) {
+			  	// ouch, an error
+				});
+
+				var print = db.find();
+				console.log(print);	
+
+			}
+		});
 	});
 }
-
 
 
 
@@ -321,21 +349,6 @@ function DisplayItems() // This displays all the items and their info on the vie
 		var display_records="";
 
 		Category();
-
-		let SortByCategoryList = document.getElementById("SortByCategory"); // This and the next 5 lines of code
-		var CategorySelection = "";									// I tried to check to see if a certain category was selected
-
-		SortByCategoryList.addEventListener('change', () => 
-		{
-			CategorySelection = SortByCategoryList.options[SortByCategoryList.selectedIndex].value;
-
-			if(CategorySelection = SortByCategoryList.options[SortByCategoryList.selectedIndex].value === noodles)
-			{
-			   	console.log(CategorySelection);
-			}
-		});
-
-
 
 		if (err) 
 		{
