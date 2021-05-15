@@ -40,7 +40,7 @@
 
         <title> Search Items </title>
     </head>
-    <body>
+    <body onload="SearchItems()">
         <div id="containter">
 
             <div class="header">
@@ -57,24 +57,17 @@
 
                 <div class="NewItemContainer">
                     <form>
-                        <select>
-                            <option> Apples </option>
-                            <option> Bottled Water </option>
-                            <option> Cheese </option>
-                            <option> Dino Nuggets </option>
-                            <option> Eggs </option>
-                            <option> Fish </option>
-                            <option> Grapes </option>
-                            <option> House </option>
-                            <option> Icecream </option>
-                            <option> Juice </option>
+                        <select id="itemContainer">
                         </select>
                     </form>
                 </div>
+
+                <div id="ItemList"></div>
                     
            </div>
 
         </div>
+        <script src="js/12-pouchdb-7.0.0.min.js"></script>
         <script src="cordova.js"></script>
         <script src="js/index.js"></script>
     </body>

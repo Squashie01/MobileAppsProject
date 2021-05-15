@@ -247,7 +247,8 @@ function Calculate() // This gets the sum of 1 of each item on the list
 
 
 
-function DisplayItems() // This displays all the items and their info on the view items page
+
+function Category()
 {
 	db.allDocs({include_docs: true}, function(err, docs) 
 	{
@@ -275,6 +276,51 @@ function DisplayItems() // This displays all the items and their info on the vie
 		{
 			categories += '<option id="itemByCategory"> ' + entry + '  </option>';
 		});
+
+		document.getElementById("SortByCategory").innerHTML = categories;
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function DisplayItems() // This displays all the items and their info on the view items page
+{
+	db.allDocs({include_docs: true}, function(err, docs) 
+	{
+		var num_records=docs.total_rows;
+		var display_records="";
+
+		Category();
 
 		let SortByCategoryList = document.getElementById("SortByCategory"); // This and the next 5 lines of code
 		var CategorySelection = "";									// I tried to check to see if a certain category was selected
@@ -328,7 +374,6 @@ function DisplayItems() // This displays all the items and their info on the vie
 		   	}
 
 		   	document.getElementById("itemsListContainer").innerHTML = display_records;
-		   	document.getElementById("SortByCategory").innerHTML = categories;
 	   		
 	   		let selection = document.getElementById("SortByPurchased"); // This was to sort the items by if they were purchased or not
 	   		var resultOfSelection = "";									// But it still needs work
@@ -356,6 +401,121 @@ function DisplayItems() // This displays all the items and their info on the vie
 	});
 
 }
+
+
+
+function SearchItems()
+{
+	db.allDocs({include_docs: true}, function(err, docs) 
+	{
+		var num_records=docs.total_rows;
+		var item_records="";
+		var ItemArray = [];
+
+		for(var i = 0; i < num_records; i++) // This makes an array of the items
+		{
+			ItemArray[i] = docs.rows[i].doc.name;
+		}
+
+		const NewItemArray = (array) =>  		// This gets the unique values in the array
+		(
+			[... new Set (array)]
+		);
+
+		var Items = NewItemArray(ItemArray); // This is the array's variable sorry about the name
+
+		console.log(Items);
+
+		Items.forEach(function(entry) // This displays the unique category values in the dropdown box
+		{
+			item_records += '<option id="items"> ' + entry + '  </option>';
+		});
+
+		document.getElementById("itemContainer").innerHTML = '<option value="" disabled selected> Search Items </option>' + item_records;
+		
+
+
+		let ItemsSelection = document.getElementById("itemContainer"); // This was to sort the items by if they were selected
+	   	var SelectionOfItem = "";									
+
+	   	ItemsSelection.addEventListener('change', () => 
+	   	{
+	   		SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value;
+
+	   		if(SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value === "Passion Fruit Juice")
+	   		{
+	   			var num_records=docs;
+				var display_records="";
+
+	   			for(var i = 0; i < num_records; i++) // This is responsible to print all the items on the list 
+					{
+						display_records=display_records 	
+						+
+
+						'<div class="item">' + 
+							'<div class="itemInfo">' +
+
+							'<div class="itemName">' + 
+							docs.rows[i].doc.name +
+							'</div>' +
+
+							'<div class="itemPrice">' +
+							'Price: ' + docs.rows[i].doc.price + ' each' +
+							'</div>' +
+
+							'<div class="itemPrice">' +
+							'Quantity: ' + docs.rows[i].doc.item_quantity + 
+							'</div>' +
+
+							'<div class="itemPrice">' +
+							'Category: ' + docs.rows[i].doc.category +
+							'</div>' +
+
+							' <div class="itemsTotalCost">' +
+							docs.rows[i].doc.totalCost+ 
+						'</div> </div> </div>' + '<br>';
+				   	}
+
+				  document.getElementById("ItemList").innerHTML = display_records;
+	   		}
+
+	   		else if(SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value === "Apples")
+	   		{
+			  	console.log(SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value);   				
+	   		}
+
+	   		else if(SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value === "Carrots")
+	   		{
+	   			console.log(SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value);
+	   		}
+	   	});
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // I feel as tho the next 2 functions could have been function
