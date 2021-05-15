@@ -251,7 +251,7 @@ function Calculate() // This gets the sum of 1 of each item on the list
 
 
 
-function Category()
+function Category(number)
 {
 	db.allDocs({include_docs: true}, function(err, docs) 
 	{
@@ -279,8 +279,15 @@ function Category()
 		{
 			categories += '<option id="itemByCategory"> ' + entry + '  </option>';
 		});
-
-		document.getElementById("SortByCategory").innerHTML = '<option value="" disabled selected> Sort By Category </option>' + categories;
+		if (number == 1)
+		{	
+			document.getElementById("SortByCategory").innerHTML = "<option value='new catigory'> new catigory </option>" + categories;
+		}
+		else 
+		{
+			document.getElementById("SortByCategory").innerHTML = '<option value="" disabled selected> Sort By Category </option>' + categories;
+		}
+		
 		
 		let SortByCategoryList = document.getElementById("SortByCategory"); // This and the next 5 lines of code
 		var CategorySelection = "";									// I tried to check to see if a certain category was selected
@@ -348,7 +355,7 @@ function DisplayItems() // This displays all the items and their info on the vie
 		var num_records=docs.total_rows;
 		var display_records="";
 
-		Category();
+		Category(0);
 
 		if (err) 
 		{
