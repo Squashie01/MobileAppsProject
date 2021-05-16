@@ -40,10 +40,10 @@
 
         <title> View All Items </title>
     </head>
-    <body onload="DisplayItems()">
+    <body onload="Category(0);">
         <div id="containter">
 
-            <div class="header">
+            <div class="header" >
                 <header>
                     <a href="index.html" class="backButton"> <img src="../www/img/back.png"> </a>
                     <a href="settings.html" class="settingsButton"> <img src="../www/img/settings.png"> </a>
@@ -58,13 +58,13 @@
                 <div id="filters">
                     <form name="sortByForm">
                         <select id="SortByCategory" name="SortByCategoryItems">
-                            <option value="" disabled selected> Sort By Category </option>
+                            <option value="All" disabled selected> Sort By Category </option>
                             <option id="itemByCategory"></option>
                         </select>
 
                         <select id="SortByPurchased" name="SortByPurchasedItems">
                             <option value="" disabled selected> Sort By Purchased </option>
-                            <option id="itemByPurchased" value="all"> All Items </option>
+                            
                             <option id="itemByPurchased" value="purchasedItemsOnly"> All Purchased Items </option>
                             <option id="itemByPurchased" value="NotPurchasedItemsOnly"> All Not Purchased Items </option>
                         </select>
