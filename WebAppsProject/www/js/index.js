@@ -20,7 +20,6 @@
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 
-
 var db;  // database variable
 
 db = new PouchDB("DLS2ShoppingList"); // this creates the database
@@ -287,7 +286,13 @@ function Category(number)
 			document.getElementById("SortByCategory").innerHTML = '<option value="" disabled selected> Sort By Category </option>' + categories;
 		}
 		
-		
+		catigoryPicked(number);
+	});
+}
+
+
+function catigoryPicked(number)
+{
 		let SortByCategoryList = document.getElementById("SortByCategory"); // This and the next 5 lines of code
 		var CategorySelection = "";									// I tried to check to see if a certain category was selected
 
@@ -297,7 +302,7 @@ function Category(number)
 
 			if(CategorySelection = SortByCategoryList.options[SortByCategoryList.selectedIndex].value = CategorySelection)
 			{
-			   	console.log(CategorySelection);
+			   	//console.log(CategorySelection);
 				if(number == 1)
 				{
 					if (CategorySelection == "new catigory")
@@ -311,6 +316,9 @@ function Category(number)
 				}
 				else
 				{
+					
+					DisplayItems(CategorySelection);
+					/*
 					db.find({
 					selector: {name: CategorySelection},
 					fields: ['_id', 'name', 'price', 'category', 'item_quantity', 'totalCost'],
@@ -321,12 +329,11 @@ function Category(number)
 					});
 
 					var print = db.find();
-					console.log(print);	
+					console.log(print);	*/
 				}
-
 			}
 		});
-	});
+		
 }
 
 
@@ -357,18 +364,15 @@ function Category(number)
 
 
 
-
-
-
-function DisplayItems() // This displays all the items and their info on the view items page
+function DisplayItems(catigory) // This displays all the items and their info on the view items page
 {
+	console.log(catigory);
 	db.allDocs({include_docs: true}, function(err, docs) 
 	{
 		var num_records=docs.total_rows;
 		var display_records="";
 
 		Category(0);
-
 		if (err) 
 		{
 	    	return console.log(err);
@@ -378,31 +382,35 @@ function DisplayItems() // This displays all the items and their info on the vie
 		{
 		  	for(var i = 0; i < num_records; i++) // This is responsible to print all the items on the list 
 			{
-				display_records=display_records 	
-				+
+				if ( docs.rows[i].doc.category == catigory)
+				{
+					display_records=display_records 	
+					+
+					
+					'<div class="item">' + 
+						'<div class="itemInfo">' +
 
-				'<div class="item">' + 
-					'<div class="itemInfo">' +
+						'<div class="itemName">' + 
+						docs.rows[i].doc.name +
+						'</div>' +
 
-					'<div class="itemName">' + 
-					docs.rows[i].doc.name +
-					'</div>' +
+						'<div class="itemPrice">' +
+						'Price: ' + docs.rows[i].doc.price + ' each' +
+						'</div>' +
 
-					'<div class="itemPrice">' +
-					'Price: ' + docs.rows[i].doc.price + ' each' +
-					'</div>' +
+						'<div class="itemPrice">' +
+						'Quantity: ' + docs.rows[i].doc.item_quantity + 
+						'</div>' +
 
-					'<div class="itemPrice">' +
-					'Quantity: ' + docs.rows[i].doc.item_quantity + 
-					'</div>' +
+						'<div class="itemPrice">' +
+						'Category: ' + docs.rows[i].doc.category +
+						'</div>' +
 
-					'<div class="itemPrice">' +
-					'Category: ' + docs.rows[i].doc.category +
-					'</div>' +
-
-					' <div class="itemsTotalCost">' +
-					docs.rows[i].doc.totalCost+ 
-				'</div> </div> </div>' + '<br>';
+						' <div class="itemsTotalCost">' +
+						docs.rows[i].doc.totalCost+ 
+					'</div> </div> </div>' + '<br>';
+				}
+				
 		   	}
 
 		   	document.getElementById("itemsListContainer").innerHTML = display_records;
