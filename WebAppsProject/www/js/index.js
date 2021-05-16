@@ -372,6 +372,7 @@ function DisplayItems(catigory) // This displays all the items and their info on
 	{
 		var num_records=docs.total_rows;
 		var display_records="";
+		var transaction="";
 		if (err) 
 		{
 	    	return console.log(err);
@@ -381,6 +382,39 @@ function DisplayItems(catigory) // This displays all the items and their info on
 		{
 		  	for(var i = 0; i < num_records; i++) // This is responsible to print all the items on the list 
 			{
+				if(docs.rows[i].doc.purchased == 1)
+					{
+						console.log(docs.rows[i].doc.purchased);
+						transaction="Paid";
+					}
+					else
+					{
+						console.log(docs.rows[i].doc.purchased);
+						transaction="Un paid";
+					}
+				
+				document.getElementById("itemsListContainer").innerHTML = display_records;
+	   		
+				let selection = document.getElementById("SortByPurchased"); // This was to sort the items by if they were purchased or not
+				var resultOfSelection = "";									// But it still needs work
+
+				selection.addEventListener('change', () => 
+				{
+					resultOfSelection = selection.options[selection.selectedIndex].value;
+					
+					if(resultOfSelection = selection.options[selection.selectedIndex].value === "purchasedItemsOnly")
+					{
+						console.log("purchesed");
+						paidT(Paid);
+						
+					}
+
+					else if(resultOfSelection = selection.options[selection.selectedIndex].value === "NotPurchasedItemsOnly")
+					{
+						console.log("un purchesed");
+						paidT(un);
+					}
+				});
 				
 				if (catigory == "All")
 				{
@@ -408,6 +442,10 @@ function DisplayItems(catigory) // This displays all the items and their info on
 
 						' <div class="itemsTotalCost">' +
 						docs.rows[i].doc.totalCost+ 
+						
+						'<div class="itemPrice">' +
+						'Transaction: ' + transaction +
+						'</div>' +
 					'</div> </div> </div>' + '<br>';
 				}
 				else
@@ -443,31 +481,6 @@ function DisplayItems(catigory) // This displays all the items and their info on
 				}
 				
 		   	}
-
-		   	document.getElementById("itemsListContainer").innerHTML = display_records;
-	   		
-	   		let selection = document.getElementById("SortByPurchased"); // This was to sort the items by if they were purchased or not
-	   		var resultOfSelection = "";									// But it still needs work
-
-	   		selection.addEventListener('change', () => 
-	   		{
-	   			resultOfSelection = selection.options[selection.selectedIndex].value;
-
-	   			if(resultOfSelection = selection.options[selection.selectedIndex].value === "all")
-	   			{
-	   				console.log("boop boop boop");
-	   			}
-
-	   			else if(resultOfSelection = selection.options[selection.selectedIndex].value === "purchasedItemsOnly")
-	   			{
-				  	PurchasedItems();   				
-	   			}
-
-	   			else if(resultOfSelection = selection.options[selection.selectedIndex].value === "NotPurchasedItemsOnly")
-	   			{
-	   				ItemsNotPurchased();
-	   			}
-	   		});
 	   	}
 	});
 
@@ -562,85 +575,6 @@ function SearchItems()
 	   	});
 	});
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// I feel as tho the next 2 functions could have been function
-
-function PurchasedItems() // This was to check to see if the items were purchased or not
-{
-	db.allDocs({include_docs: true}, function(err, docs) 
-	{
-		if (err) 
-		{
-			return console.log(err);
-		} 
-		else 
-		{
-			var num_records=docs.total_rows;
-			var display_records="";
-
-			for(var i = 0; i < num_records; i++)
-			{
-				if(docs.rows[i].doc.purchased.value = 1)
-				{
-					console.log("Items were purchased!");
-				}
-			}			   
-		}
-	});
-}
-
-
-
-function ItemsNotPurchased() // This was to check to see if the items were purchased or not
-{
-	db.allDocs({include_docs: true}, function(err, docs) 
-	{
-		if (err) 
-		{
-			return console.log(err);
-		} 
-		else 
-		{
-			var num_records=docs.total_rows;
-			var display_records="";
-
-			for(var i = 0; i < num_records; i++)
-			{
-				if(docs.rows[i].doc.purchased.value = 0)
-				{
-					console.log("Items were not purchased!");
-				}
-			}			   
-		}
-	});
-}
-
 
 
 function AddItemNotification() // This is the alert when an item was successfully added to the list
