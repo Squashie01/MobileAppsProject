@@ -284,6 +284,7 @@ function Category(number)
 		else 
 		{
 			document.getElementById("SortByCategory").innerHTML = "<option value='All' disabled selected> Sort By Category </option>" + "<option value='All'> All </option>" + categories;
+			DisplayItems("All");
 		}
 		
 		catigoryPicked(number);
