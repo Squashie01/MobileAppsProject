@@ -279,11 +279,11 @@ function Category(number)
 		});
 		if (number == 1)
 		{	
-			document.getElementById("SortByCategory").innerHTML = "<option value='new catigory'> new catigory </option>" + categories;
+			document.getElementById("SortByCategory").innerHTML = "<option value='new catigory' onload='DisplayItems('All')'> new catigory </option>" + categories;
 		}
 		else 
 		{
-			document.getElementById("SortByCategory").innerHTML = '<option value="" disabled selected> Sort By Category </option>' + categories;
+			document.getElementById("SortByCategory").innerHTML = "<option value='All' disabled selected> Sort By Category </option>" + "<option value='All'> All </option>" + categories;
 		}
 		
 		catigoryPicked(number);
@@ -316,8 +316,8 @@ function catigoryPicked(number)
 				}
 				else
 				{
-					
 					DisplayItems(CategorySelection);
+					
 					/*
 					db.find({
 					selector: {name: CategorySelection},
@@ -371,8 +371,6 @@ function DisplayItems(catigory) // This displays all the items and their info on
 	{
 		var num_records=docs.total_rows;
 		var display_records="";
-
-		Category(0);
 		if (err) 
 		{
 	    	return console.log(err);
@@ -382,6 +380,37 @@ function DisplayItems(catigory) // This displays all the items and their info on
 		{
 		  	for(var i = 0; i < num_records; i++) // This is responsible to print all the items on the list 
 			{
+				
+				if (catigory == "All")
+				{
+					display_records=display_records 	
+					+
+					
+					'<div class="item">' + 
+						'<div class="itemInfo">' +
+
+						'<div class="itemName">' + 
+						docs.rows[i].doc.name +
+						'</div>' +
+
+						'<div class="itemPrice">' +
+						'Price: ' + docs.rows[i].doc.price + ' each' +
+						'</div>' +
+
+						'<div class="itemPrice">' +
+						'Quantity: ' + docs.rows[i].doc.item_quantity + 
+						'</div>' +
+
+						'<div class="itemPrice">' +
+						'Category: ' + docs.rows[i].doc.category +
+						'</div>' +
+
+						' <div class="itemsTotalCost">' +
+						docs.rows[i].doc.totalCost+ 
+					'</div> </div> </div>' + '<br>';
+				}
+				else
+				{
 				if ( docs.rows[i].doc.category == catigory)
 				{
 					display_records=display_records 	
@@ -409,6 +438,7 @@ function DisplayItems(catigory) // This displays all the items and their info on
 						' <div class="itemsTotalCost">' +
 						docs.rows[i].doc.totalCost+ 
 					'</div> </div> </div>' + '<br>';
+				}
 				}
 				
 		   	}
