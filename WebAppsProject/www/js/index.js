@@ -151,9 +151,6 @@ function addItem() // This adds an item to the list
 			confirmButtonText: 'Will add them now'
 		});
 		event.preventDefault();
-		/*const error = document.getElementsByClassName("AddItemBtn");
-		error.addEventListener("click", EmptyForm()); */
-		alert("nothing entered");
 	}
 	else 
 	{
@@ -353,16 +350,11 @@ function seeIfItIsPaidOrNot(numb)
 function DisplayItems(catigory) // This displays all the items and their info on the view items page
 {
 	console.log(catigory);
-	
 	db.allDocs({include_docs: true}, function(err, docs) 
 	{
 		var num_records=docs.total_rows;
 		var display_records="";
 		var transaction="";
-		var decision="";
-		
-		decision=seeIfItIsPaidOrNot();
-		console.log(decision);
 		if (err) 
 		{
 	    	return console.log(err);
@@ -373,45 +365,26 @@ function DisplayItems(catigory) // This displays all the items and their info on
 		  	for(var i = 0; i < num_records; i++) // This is responsible to print all the items on the list 
 			{
 				if(docs.rows[i].doc.purchased == 1)
-					{
-						console.log(docs.rows[i].doc.purchased);
-						transaction= '<div class="itemPrice">' +
-                     '<img src="../www/img/check.png">' +
-                    '</div>'
-					}
-					else
-					{
-						console.log(docs.rows[i].doc.purchased);
-						transaction="Un paid";
-					} 
-				/*function ToSeeIfPaidIsSelected()
 				{
-					document.getElementById("itemsListContainer").innerHTML = display_records;
+					console.log(docs.rows[i].doc.purchased);
+					transaction = '<div class="itemPrice">' +
+					'Purchased:  ' + '<img src="../www/img/check.png" class="checkImg">' +
+					'</div>'
+				}
+
+				else if(docs.rows[i].doc.purchased == 0)
+				{
+					console.log(docs.rows[i].doc.purchased);
+					transaction = '<div class="itemPrice">' +
+					'Purchased:  ' + '<img src="../www/img/delete.png" class="delImg">' +
+					'</div>'
+				} 
 				
-					let selection = document.getElementById("SortByPurchased"); // This was to sort the items by if they were purchased or not
-					var resultOfSelection = "";									// But it still needs work
-
-					selection.addEventListener('change', () => 
-					{
-						resultOfSelection = selection.options[selection.selectedIndex].value;
-						
-						if(resultOfSelection = selection.options[selection.selectedIndex].value === "purchasedItemsOnly")
-						{
-							//console.log(decision);
-							//paidT(Paid);
-							decision="Paid";
-						}
-
-						else if(resultOfSelection = selection.options[selection.selectedIndex].value === "NotPurchasedItemsOnly")
-						{
-							//console.log(decision);
-							//paidT(un);
-							decision="un";
-						}
-						DecisionsOnCat(decision);
-					}); 
-				}*/
-				function displayStuf()
+				document.getElementById("itemsListContainer").innerHTML = display_records;
+	   		
+				
+				
+				if (catigory == "All")
 				{
 					display_records=display_records 	
 					+
@@ -435,39 +408,141 @@ function DisplayItems(catigory) // This displays all the items and their info on
 						'Category: ' + docs.rows[i].doc.category +
 						'</div>' +
 
+						transaction +
+
 						' <div class="itemsTotalCost">' +
-						docs.rows[i].doc.totalCost+ 
-						
-						'<div class="itemPrice">' +
-						'Transaction: ' + transaction +
-						'</div>' +
+						docs.rows[i].doc.totalCost+
+
 					'</div> </div> </div>' + '<br>';
 					document.getElementById("itemsListContainer").innerHTML = display_records;
 				}
-				function DecisionsOnCat(paid)
-				{
-					/*ToSeeIfPaidIsSelected();
-					decision=paid;
-					console.log(decision);*/
-					if ((docs.rows[i].doc.purchased == decision) || (decision == 3))
-					{
-						if (catigory == "All")
-						{
-							displayStuf();
-						}
 
-						else
-						{
-							if ( docs.rows[i].doc.category == catigory)
-							{
-								displayStuf();
-							}
-						} 
+				else
+				{
+					if ( docs.rows[i].doc.category == catigory)
+					{
+						display_records=display_records 	
+						+
+						
+						'<div class="item">' + 
+							'<div class="itemInfo">' +
+
+							'<div class="itemName">' + 
+							docs.rows[i].doc.name +
+							'</div>' +
+
+							'<div class="itemPrice">' +
+							'Price: ' + docs.rows[i].doc.price + ' each' +
+							'</div>' +
+
+							'<div class="itemPrice">' +
+							'Quantity: ' + docs.rows[i].doc.item_quantity + 
+							'</div>' +
+
+							'<div class="itemPrice">' +
+							'Category: ' + docs.rows[i].doc.category +
+							'</div>' +
+
+							transaction +
+
+							' <div class="itemsTotalCost">' +
+							docs.rows[i].doc.totalCost+ 
+
+						'</div> </div> </div>' + '<br>';
+						document.getElementById("itemsListContainer").innerHTML = display_records;
 					}
-				}
-				DecisionsOnCat();
+				} 
+				
 		   	}
 	   	}
+	});
+}
+
+
+
+function SearchItems()
+{
+	db.allDocs({include_docs: true}, function(err, docs) 
+	{
+		var num_records=docs.total_rows;
+		var item_records="";
+		var ItemArray = [];
+
+		for(var i = 0; i < num_records; i++) // This makes an array of the items
+		{
+			ItemArray[i] = docs.rows[i].doc.name;
+		}
+
+		const NewItemArray = (array) =>  		// This gets the unique values in the array
+		(
+			[... new Set (array)]
+		);
+
+		var Items = NewItemArray(ItemArray); // This is the array's variable sorry about the name
+
+		console.log(Items);
+
+		Items.forEach(function(entry) // This displays the unique category values in the dropdown box
+		{
+			item_records += '<option id="items"> ' + entry + '  </option>';
+		});
+
+		document.getElementById("itemContainer").innerHTML = '<option value="" disabled selected> Search Items </option>' + item_records;
+
+		let ItemsSelection = document.getElementById("itemContainer"); // This was to sort the items by if they were selected
+		var SelectionOfItem = "";									
+
+		ItemsSelection.addEventListener('change', () => 
+		{
+			SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value;
+
+			if(SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value = SelectionOfItem)
+			{
+				var num_records=docs.total_rows;
+				var display_records="";
+
+				if (err) 
+				{
+			    	return console.log(err);
+			   	} 
+
+				else 
+				{
+				  	for(var i = 0; i < num_records; i++) // This is responsible to print all the items on the list 
+					{
+			   			if ( docs.rows[i].doc.name == SelectionOfItem)
+						{
+							display_records=display_records 	
+							+
+							
+							'<div class="item">' + 
+								'<div class="itemInfo">' +
+
+								'<div class="itemName">' + 
+								docs.rows[i].doc.name +
+								'</div>' +
+
+								'<div class="itemPrice">' +
+								'Price: ' + docs.rows[i].doc.price + ' each' +
+								'</div>' +
+
+								'<div class="itemPrice">' +
+								'Quantity: ' + docs.rows[i].doc.item_quantity + 
+								'</div>' +
+
+								'<div class="itemPrice">' +
+							 	'Category: ' + docs.rows[i].doc.category +
+								'</div>' +
+
+								' <div class="itemsTotalCost">' +
+								docs.rows[i].doc.totalCost+ 
+							'</div> </div> </div>' + '<br>';
+						}								
+				   	} 	
+			   	}
+				document.getElementById("itemsListContainer").innerHTML = display_records;
+			}
+		});
 	});
 }
 
