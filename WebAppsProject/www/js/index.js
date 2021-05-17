@@ -169,7 +169,7 @@ function addItem() // This adds an item to the list
 				title: 'Success!',
 				text: 'Item was added!',
 				icon: 'success',
-				confirmButtonText: 'Cool'
+				confirmButtonText: '<span onclick="reloading()"> Cool </span> '
 			});
 			event.preventDefault();
 			
@@ -181,7 +181,10 @@ function addItem() // This adds an item to the list
 	}	
 }
 
-
+function reloading()
+{
+	window.location.reload();
+}
 
 function RemoveAllItems() // This removes all the items from the list
 {
