@@ -452,10 +452,4 @@ input.checkbox1
       margin-right: 3%;
       margin-top: 5%;
     }
-
-    select.decorated option:hover 
-    {
-      background-color: yellow;
-      box-shadow: 0 0 10px 100px #1882A8 inset;
-    }
 }

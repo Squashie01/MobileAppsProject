@@ -498,67 +498,61 @@ function SearchItems()
 		document.getElementById("itemContainer").innerHTML = '<option value="" disabled selected> Search Items </option>' + item_records;
 
 		let ItemsSelection = document.getElementById("itemContainer"); // This was to sort the items by if they were selected
-	var SelectionOfItem = "";									
+		var SelectionOfItem = "";									
 
-	ItemsSelection.addEventListener('change', () => 
-	{
-		SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value;
-
-		if(SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value = SelectionOfItem)
+		ItemsSelection.addEventListener('change', () => 
 		{
-			var num_records=docs.total_rows;
-			var display_records="";
+			SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value;
 
-			if (err) 
+			if(SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value = SelectionOfItem)
 			{
-		    	return console.log(err);
-		   	} 
+				var num_records=docs.total_rows;
+				var display_records="";
 
-			else 
-			{
-			  	for(var i = 0; i < num_records; i++) // This is responsible to print all the items on the list 
+				if (err) 
 				{
-		   			if ( docs.rows[i].doc.name == SelectionOfItem)
+			    	return console.log(err);
+			   	} 
+
+				else 
+				{
+				  	for(var i = 0; i < num_records; i++) // This is responsible to print all the items on the list 
 					{
-						display_records=display_records 	
-						+
-						
-						'<div class="item">' + 
-							'<div class="itemInfo">' +
+			   			if ( docs.rows[i].doc.name == SelectionOfItem)
+						{
+							display_records=display_records 	
+							+
+							
+							'<div class="item">' + 
+								'<div class="itemInfo">' +
 
-							'<div class="itemName">' + 
-							docs.rows[i].doc.name +
-							'</div>' +
+								'<div class="itemName">' + 
+								docs.rows[i].doc.name +
+								'</div>' +
 
-							'<div class="itemPrice">' +
-							'Price: ' + docs.rows[i].doc.price + ' each' +
-							'</div>' +
+								'<div class="itemPrice">' +
+								'Price: ' + docs.rows[i].doc.price + ' each' +
+								'</div>' +
 
-							'<div class="itemPrice">' +
-							'Quantity: ' + docs.rows[i].doc.item_quantity + 
-							'</div>' +
+								'<div class="itemPrice">' +
+								'Quantity: ' + docs.rows[i].doc.item_quantity + 
+								'</div>' +
 
-							'<div class="itemPrice">' +
-							'Category: ' + docs.rows[i].doc.category +
-							'</div>' +
+								'<div class="itemPrice">' +
+							 	'Category: ' + docs.rows[i].doc.category +
+								'</div>' +
 
-							' <div class="itemsTotalCost">' +
-							docs.rows[i].doc.totalCost+ 
-						'</div> </div> </div>' + '<br>';
-					}								
-			   	} 	
-		   	}
-			document.getElementById("itemsListContainer").innerHTML = display_records;
-		}
-	});
-
+								' <div class="itemsTotalCost">' +
+								docs.rows[i].doc.totalCost+ 
+							'</div> </div> </div>' + '<br>';
+						}								
+				   	} 	
+			   	}
+				document.getElementById("itemsListContainer").innerHTML = display_records;
+			}
+		});
 	});
 }
-
-
-
-
-
 
 
 

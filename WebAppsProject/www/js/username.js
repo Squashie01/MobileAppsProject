@@ -46,15 +46,42 @@ function DisplayUsername() // This is prints the username
 
 		else 
 		{
-			display_records = display_records 
-				+
-				'<div class="WelcomeUser">' +
-                   'Welcome, ' +
-                   docs.rows[num_records-1].doc.user__name +
-                '</div>';
+			db.info().then(function(result)
+			{
+				if(result.doc_count === 0)
+				{
+					Swal.fire
+				    ({
+					    title: 'Error!',
+					    text: 'You need to enter a username!',
+					    icon: 'warning',
+					    confirmButtonText: '<span onclick="redirect()"> Will make one now! </span>'
+				    });
+				}
 
-		   	document.getElementById("username").innerHTML = display_records;
-	   	}
+				else if(result.doc_count === 1)
+				{
+					display_records = display_records 
+					+
+					'<div class="WelcomeUser">' +
+	                   'Welcome, ' +
+	                   docs.rows[num_records-1].doc.user__name +
+	                '</div>';
+	                document.getElementById("username").innerHTML = display_records;
+				}
+
+				else if(result.doc_count > 0)
+				{
+					display_records = display_records 
+					+
+					'<div class="WelcomeUser">' +
+	                   'Welcome, ' +
+	                   docs.rows[num_records-1].doc.user__name +
+	                '</div>';
+	                document.getElementById("username").innerHTML = display_records;
+				}
+			});
+	   	};
 	});
 }
 
