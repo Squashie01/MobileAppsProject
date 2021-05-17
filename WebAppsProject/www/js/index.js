@@ -351,6 +351,7 @@ function DisplayItems(catigory) // This displays all the items and their info on
 		var num_records=docs.total_rows;
 		var display_records="";
 		var transaction="";
+		var decision="";
 		if (err) 
 		{
 	    	return console.log(err);
@@ -370,31 +371,34 @@ function DisplayItems(catigory) // This displays all the items and their info on
 						console.log(docs.rows[i].doc.purchased);
 						transaction="Un paid";
 					} 
-				
-				document.getElementById("itemsListContainer").innerHTML = display_records;
-	   		
-				let selection = document.getElementById("SortByPurchased"); // This was to sort the items by if they were purchased or not
-				var resultOfSelection = "";									// But it still needs work
-
-				selection.addEventListener('change', () => 
+				function ToSeeIfPaidIsSelected()
 				{
-					resultOfSelection = selection.options[selection.selectedIndex].value;
-					
-					if(resultOfSelection = selection.options[selection.selectedIndex].value === "purchasedItemsOnly")
-					{
-						console.log("purchesed");
-						paidT(Paid);
-						
-					}
-
-					else if(resultOfSelection = selection.options[selection.selectedIndex].value === "NotPurchasedItemsOnly")
-					{
-						console.log("un purchesed");
-						paidT(un);
-					}
-				}); 
+					document.getElementById("itemsListContainer").innerHTML = display_records;
 				
-				if (catigory == "All")
+					let selection = document.getElementById("SortByPurchased"); // This was to sort the items by if they were purchased or not
+					var resultOfSelection = "";									// But it still needs work
+
+					selection.addEventListener('change', () => 
+					{
+						resultOfSelection = selection.options[selection.selectedIndex].value;
+						
+						if(resultOfSelection = selection.options[selection.selectedIndex].value === "purchasedItemsOnly")
+						{
+							//console.log(decision);
+							//paidT(Paid);
+							decision="Paid";
+						}
+
+						else if(resultOfSelection = selection.options[selection.selectedIndex].value === "NotPurchasedItemsOnly")
+						{
+							//console.log(decision);
+							//paidT(un);
+							decision="un";
+						}
+						DecisionsOnCat(decision);
+					}); 
+				}
+				function displayStuf()
 				{
 					display_records=display_records 	
 					+
@@ -427,40 +431,34 @@ function DisplayItems(catigory) // This displays all the items and their info on
 					'</div> </div> </div>' + '<br>';
 					document.getElementById("itemsListContainer").innerHTML = display_records;
 				}
-
-				else
+				function DecisionsOnCat(paid)
 				{
-					if ( docs.rows[i].doc.category == catigory)
+					ToSeeIfPaidIsSelected();
+					decision=paid;
+					console.log(decision);
+					
+					if (catigory == "All")
 					{
-						display_records=display_records 	
-						+
-						
-						'<div class="item">' + 
-							'<div class="itemInfo">' +
-
-							'<div class="itemName">' + 
-							docs.rows[i].doc.name +
-							'</div>' +
-
-							'<div class="itemPrice">' +
-							'Price: ' + docs.rows[i].doc.price + ' each' +
-							'</div>' +
-
-							'<div class="itemPrice">' +
-							'Quantity: ' + docs.rows[i].doc.item_quantity + 
-							'</div>' +
-
-							'<div class="itemPrice">' +
-							'Category: ' + docs.rows[i].doc.category +
-							'</div>' +
-
-							' <div class="itemsTotalCost">' +
-							docs.rows[i].doc.totalCost+ 
-						'</div> </div> </div>' + '<br>';
-						document.getElementById("itemsListContainer").innerHTML = display_records;
+						displayStuf();
+						if(decision == "Paid")
+						{
+							displayStuf();
+						}
+						else
+						{
+							displayStuf();
+						}
 					}
-				} 
-				
+
+					else
+					{
+						if ( docs.rows[i].doc.category == catigory)
+						{
+							displayStuf();
+						}
+					} 
+				}
+				DecisionsOnCat();
 		   	}
 	   	}
 	});
