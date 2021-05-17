@@ -137,12 +137,22 @@ function addItem() // This adds an item to the list
 	purchased: purchasedOrNot,
 	totalCost: newTotal
 	};
-
+	
+	
 
 	if (item_name.toString().length <= 0 || item_price.toString().length <= 0) // This checks to see if the user entered the item name
-	{																		   // or item price if they didn't an error message will be displayed
-		const error = document.getElementsByClassName("AddItemBtn");
-		error.addEventListener("click", EmptyForm());
+	{
+		// or item price if they didn't an error message will be displayed
+		Swal.fire
+		({
+			title: 'Error!',
+			text: 'Item details are missing!',
+			icon: 'warning',
+			confirmButtonText: 'Will add them now'
+		});
+		event.preventDefault();
+		/*const error = document.getElementsByClassName("AddItemBtn");
+		error.addEventListener("click", EmptyForm()); */
 		alert("nothing entered");
 	}
 	else 
@@ -153,9 +163,18 @@ function addItem() // This adds an item to the list
 			{
 		      console.log('Successfully saved a item!');
 		    }
-
-		    const btn = document.getElementsByClassName("AddItemBtn");
-			btn.addEventListener("click", AddItemNotification());
+			
+			Swal.fire
+			({
+				title: 'Success!',
+				text: 'Item was added!',
+				icon: 'success',
+				confirmButtonText: 'Cool'
+			});
+			event.preventDefault();
+			
+		    /*const btn = document.getElementsByClassName("AddItemBtn");
+			btn.addEventListener("click", AddItemNotification()); */
 
 		});
 		event.preventDefault();	
@@ -350,7 +369,7 @@ function DisplayItems(catigory) // This displays all the items and their info on
 					{
 						console.log(docs.rows[i].doc.purchased);
 						transaction="Un paid";
-					}
+					} 
 				
 				document.getElementById("itemsListContainer").innerHTML = display_records;
 	   		
@@ -373,7 +392,7 @@ function DisplayItems(catigory) // This displays all the items and their info on
 						console.log("un purchesed");
 						paidT(un);
 					}
-				});
+				}); 
 				
 				if (catigory == "All")
 				{
@@ -406,6 +425,7 @@ function DisplayItems(catigory) // This displays all the items and their info on
 						'Transaction: ' + transaction +
 						'</div>' +
 					'</div> </div> </div>' + '<br>';
+					document.getElementById("itemsListContainer").innerHTML = display_records;
 				}
 
 				else
@@ -437,8 +457,9 @@ function DisplayItems(catigory) // This displays all the items and their info on
 							' <div class="itemsTotalCost">' +
 							docs.rows[i].doc.totalCost+ 
 						'</div> </div> </div>' + '<br>';
+						document.getElementById("itemsListContainer").innerHTML = display_records;
 					}
-				}
+				} 
 				
 		   	}
 	   	}
@@ -524,11 +545,10 @@ function SearchItems()
 							' <div class="itemsTotalCost">' +
 							docs.rows[i].doc.totalCost+ 
 						'</div> </div> </div>' + '<br>';
-					}				
-			   	}
-
-			   	document.getElementById("itemsListContainer").innerHTML = display_records;
+					}								
+			   	} 	
 		   	}
+			document.getElementById("itemsListContainer").innerHTML = display_records;
 		}
 	});
 
