@@ -26,8 +26,6 @@ db = new PouchDB("DLS2ShoppingList"); // this creates the database
 
 
 
-
-
 var Quan = 1;
   
 function add() // this controls the + button which increases the quantity by 1
@@ -277,6 +275,7 @@ function Category(number)
 		{
 			categories += '<option id="itemByCategory"> ' + entry + '  </option>';
 		});
+
 		if (number == 1)
 		{	
 			document.getElementById("SortByCategory").innerHTML = "<option value='new catigory' onload='DisplayItems('All')'> new catigory </option>" + categories;
@@ -303,7 +302,6 @@ function catigoryPicked(number)
 
 			if(CategorySelection = SortByCategoryList.options[SortByCategoryList.selectedIndex].value = CategorySelection)
 			{
-			   	//console.log(CategorySelection);
 				if(number == 1)
 				{
 					if (CategorySelection == "new catigory")
@@ -318,50 +316,11 @@ function catigoryPicked(number)
 				else
 				{
 					DisplayItems(CategorySelection);
-					
-					/*
-					db.find({
-					selector: {name: CategorySelection},
-					fields: ['_id', 'name', 'price', 'category', 'item_quantity', 'totalCost'],
-					sort: ['name']
-					}).then(function (result) {
-					}).catch(function (err) {
-					// ouch, an error
-					});
-
-					var print = db.find();
-					console.log(print);	*/
 				}
 			}
 		});
 		
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -448,42 +407,42 @@ function DisplayItems(catigory) // This displays all the items and their info on
 						'</div>' +
 					'</div> </div> </div>' + '<br>';
 				}
+
 				else
 				{
-				if ( docs.rows[i].doc.category == catigory)
-				{
-					display_records=display_records 	
-					+
-					
-					'<div class="item">' + 
-						'<div class="itemInfo">' +
+					if ( docs.rows[i].doc.category == catigory)
+					{
+						display_records=display_records 	
+						+
+						
+						'<div class="item">' + 
+							'<div class="itemInfo">' +
 
-						'<div class="itemName">' + 
-						docs.rows[i].doc.name +
-						'</div>' +
+							'<div class="itemName">' + 
+							docs.rows[i].doc.name +
+							'</div>' +
 
-						'<div class="itemPrice">' +
-						'Price: ' + docs.rows[i].doc.price + ' each' +
-						'</div>' +
+							'<div class="itemPrice">' +
+							'Price: ' + docs.rows[i].doc.price + ' each' +
+							'</div>' +
 
-						'<div class="itemPrice">' +
-						'Quantity: ' + docs.rows[i].doc.item_quantity + 
-						'</div>' +
+							'<div class="itemPrice">' +
+							'Quantity: ' + docs.rows[i].doc.item_quantity + 
+							'</div>' +
 
-						'<div class="itemPrice">' +
-						'Category: ' + docs.rows[i].doc.category +
-						'</div>' +
+							'<div class="itemPrice">' +
+							'Category: ' + docs.rows[i].doc.category +
+							'</div>' +
 
-						' <div class="itemsTotalCost">' +
-						docs.rows[i].doc.totalCost+ 
-					'</div> </div> </div>' + '<br>';
-				}
+							' <div class="itemsTotalCost">' +
+							docs.rows[i].doc.totalCost+ 
+						'</div> </div> </div>' + '<br>';
+					}
 				}
 				
 		   	}
 	   	}
 	});
-
 }
 
 
@@ -516,26 +475,33 @@ function SearchItems()
 		});
 
 		document.getElementById("itemContainer").innerHTML = '<option value="" disabled selected> Search Items </option>' + item_records;
-		
-
 
 		let ItemsSelection = document.getElementById("itemContainer"); // This was to sort the items by if they were selected
-	   	var SelectionOfItem = "";									
+	var SelectionOfItem = "";									
 
-	   	ItemsSelection.addEventListener('change', () => 
-	   	{
-	   		SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value;
+	ItemsSelection.addEventListener('change', () => 
+	{
+		SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value;
 
-	   		if(SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value === "Passion Fruit Juice")
-	   		{
-	   			var num_records=docs;
-				var display_records="";
+		if(SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value = SelectionOfItem)
+		{
+			var num_records=docs.total_rows;
+			var display_records="";
 
-	   			for(var i = 0; i < num_records; i++) // This is responsible to print all the items on the list 
+			if (err) 
+			{
+		    	return console.log(err);
+		   	} 
+
+			else 
+			{
+			  	for(var i = 0; i < num_records; i++) // This is responsible to print all the items on the list 
+				{
+		   			if ( docs.rows[i].doc.name == SelectionOfItem)
 					{
 						display_records=display_records 	
 						+
-
+						
 						'<div class="item">' + 
 							'<div class="itemInfo">' +
 
@@ -558,23 +524,26 @@ function SearchItems()
 							' <div class="itemsTotalCost">' +
 							docs.rows[i].doc.totalCost+ 
 						'</div> </div> </div>' + '<br>';
-				   	}
+					}				
+			   	}
 
-				  document.getElementById("ItemList").innerHTML = display_records;
-	   		}
+			   	document.getElementById("itemsListContainer").innerHTML = display_records;
+		   	}
+		}
+	});
 
-	   		else if(SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value === "Apples")
-	   		{
-			  	console.log(SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value);   				
-	   		}
-
-	   		else if(SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value === "Carrots")
-	   		{
-	   			console.log(SelectionOfItem = ItemsSelection.options[ItemsSelection.selectedIndex].value);
-	   		}
-	   	});
 	});
 }
+
+
+
+
+
+
+
+
+
+
 
 
 function AddItemNotification() // This is the alert when an item was successfully added to the list
