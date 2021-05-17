@@ -19,7 +19,7 @@
 
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
-
+RemoveAllItems
 var db;  // database variable
 
 db = new PouchDB("DLS2ShoppingList"); // this creates the database
@@ -268,6 +268,7 @@ function Calculate() // This gets the sum of 1 of each item on the list
 
 function Category(number)
 {
+	seeIfItIsPaidOrNot(3);
 	db.allDocs({include_docs: true}, function(err, docs) 
 	{
 		var num_records=docs.total_rows;
@@ -341,17 +342,27 @@ function catigoryPicked(number)
 		
 }
 
-
+function seeIfItIsPaidOrNot(numb)
+{
+	var decision="";
+	decision=3;
+	console.log(numb);
+	return (decision);
+}
 
 function DisplayItems(catigory) // This displays all the items and their info on the view items page
 {
 	console.log(catigory);
+	
 	db.allDocs({include_docs: true}, function(err, docs) 
 	{
 		var num_records=docs.total_rows;
 		var display_records="";
 		var transaction="";
 		var decision="";
+		
+		decision=seeIfItIsPaidOrNot();
+		console.log(decision);
 		if (err) 
 		{
 	    	return console.log(err);
@@ -364,14 +375,16 @@ function DisplayItems(catigory) // This displays all the items and their info on
 				if(docs.rows[i].doc.purchased == 1)
 					{
 						console.log(docs.rows[i].doc.purchased);
-						transaction="Paid";
+						transaction= '<div class="itemPrice">' +
+                     '<img src="../www/img/check.png">' +
+                    '</div>'
 					}
 					else
 					{
 						console.log(docs.rows[i].doc.purchased);
 						transaction="Un paid";
 					} 
-				function ToSeeIfPaidIsSelected()
+				/*function ToSeeIfPaidIsSelected()
 				{
 					document.getElementById("itemsListContainer").innerHTML = display_records;
 				
@@ -397,7 +410,7 @@ function DisplayItems(catigory) // This displays all the items and their info on
 						}
 						DecisionsOnCat(decision);
 					}); 
-				}
+				}*/
 				function displayStuf()
 				{
 					display_records=display_records 	
@@ -433,30 +446,24 @@ function DisplayItems(catigory) // This displays all the items and their info on
 				}
 				function DecisionsOnCat(paid)
 				{
-					ToSeeIfPaidIsSelected();
+					/*ToSeeIfPaidIsSelected();
 					decision=paid;
-					console.log(decision);
-					
-					if (catigory == "All")
+					console.log(decision);*/
+					if ((docs.rows[i].doc.purchased == decision) || (decision == 3))
 					{
-						displayStuf();
-						if(decision == "Paid")
+						if (catigory == "All")
 						{
 							displayStuf();
 						}
+
 						else
 						{
-							displayStuf();
-						}
+							if ( docs.rows[i].doc.category == catigory)
+							{
+								displayStuf();
+							}
+						} 
 					}
-
-					else
-					{
-						if ( docs.rows[i].doc.category == catigory)
-						{
-							displayStuf();
-						}
-					} 
 				}
 				DecisionsOnCat();
 		   	}
